@@ -1,4 +1,5 @@
 import './App.css';
+import Info from "./Info.js";
 
 function App() {
   return (
@@ -11,25 +12,13 @@ function App() {
   );
 }
 
-function Info() {
-  const title = "This is my title.";
-  const showTitle = false;
-
-    return (
-      <div>
-        
-        <h1>{showTitle ? title : "No Title."} Inventory System</h1>
-        <p>Manage your stuff.</p>
-      </div>
-    );
-}
-
 function AddItem() {
+  const value = "default";
+
   return (
     <form>
       <label for="text-form">Type something: </label>
-      <input type="text" id="text-form"/>
-      <Info />
+      <input type="text" value={value} id="text-form"/>
     </form>
   );
 }
