@@ -12,12 +12,16 @@ function App() {
 }
 
 function Info() {
-  return (
-    <div>
-      <h1>Inventory System</h1>
-      <p>Manage your stuff.</p>
-    </div>
-  );
+  const title = "This is my title.";
+  const showTitle = false;
+
+    return (
+      <div>
+        
+        <h1>{showTitle ? title : "No Title."} Inventory System</h1>
+        <p>Manage your stuff.</p>
+      </div>
+    );
 }
 
 function AddItem() {
