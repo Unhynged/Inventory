@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./AddItem.module.css";
 
 function AddItem(props) {
     const [name, setName] = useState("");

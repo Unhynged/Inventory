@@ -1,8 +1,12 @@
-import './App.css';
 import SearchBar from "./SearchBar";
 import AddItem from "./AddItem";
 import { useState } from "react";
 import ItemsDisplay from "./ItemsDisplay";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  color: ${props => props.color ? props.color : "black"};
+`;
 
 function App() { 
   const [filters, setFilters] = useState({});
@@ -22,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+      <Title color="blue">test</Title>
       <SearchBar updateSearchParams={updateFilters}/>
       <ItemsDisplay items={ data["items"]} />
       <AddItem addItem={addItemToData} />
@@ -31,16 +36,3 @@ function App() {
 
 export default App;
 
-// Look at how we can display data, specifically inventory items and how we can add inventory items to our inventory management system.
-//
-// Creating the Add Item Component
-// Simple input field, thats going to have a name, price, type and brand.
-//
-// Summary
-// Inside of items display we're taking one prop, that prop is items. We return or render using map a bunch of separate components or divs to display this item.
-// {props.items.map((item) => { })}
-// This means now run whatever function we put inside of this map here and whatever it returns we're going to show that on the screen.
-//
-//
-//
-//
