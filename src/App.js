@@ -1,25 +1,46 @@
 import './App.css';
 import SearchBar from "./SearchBar";
+import AddItem from "./AddItem";
 import { useState } from "react";
+import ItemsDisplay from "./ItemsDisplay";
 
 function App() { 
-  const [data, setData] = useState({});
+  const [filters, setFilters] = useState({});
+  const [data, setData] = useState({ items: [] });
 
-  const updateData = (searchParams) => {
-    setData(searchParams);
-  }
+  const updateFilters = (searchParams) => {
+    setFilters(searchParams);
+  };
+
+  const addItemToData = (item) => {
+    let items = data["items"];
+    item.id = items.length;
+    items.push(item);
+    setData({items: items });
+    console.log(data);
+  };
 
   return (
     <div className="App">
-      <SearchBar callback={updateData}/>
-      <p>Name: {"name" in data ? data["name"] : "No Data to display"}</p>
-      <p>Max Price: {"price" in data ? data["price"] : "No Data to display"}</p>
-      <p>Type: {"type" in data ? data["name"] : "No Data to display"}</p>
-      <p>Brand: {"brand" in data ? data["name"] : "No Data to display"}</p>
+      <SearchBar updateSearchParams={updateFilters}/>
+      <ItemsDisplay items={ data["items"]} />
+      <AddItem addItem={addItemToData} />
     </div>
   );
-} // Now in the search bar, we can access from the props this parameter called callback. We can call that function and what that function will do is then update the data, so we will change the state in the component, and didn't need to change any of the props in SearchBar.js; we just called a function that then change the state on the component that rendered us. 
-
-//So what we do is we pass a callback function so we can actually modify the state of a parent component from a child component. We pass the data as a parameter to this callback function and then this callback function use that data to update the state in this component and that caused this component to rerender and then display everything that is here. 
+} 
 
 export default App;
+
+// Look at how we can display data, specifically inventory items and how we can add inventory items to our inventory management system.
+//
+// Creating the Add Item Component
+// Simple input field, thats going to have a name, price, type and brand.
+//
+// Summary
+// Inside of items display we're taking one prop, that prop is items. We return or render using map a bunch of separate components or divs to display this item.
+// {props.items.map((item) => { })}
+// This means now run whatever function we put inside of this map here and whatever it returns we're going to show that on the screen.
+//
+//
+//
+//
