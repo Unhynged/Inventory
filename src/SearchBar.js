@@ -7,10 +7,7 @@ function SearchBar(props) {
     const [brand, setBrand] = useState("");
 
     const searchButtonPressed = () => {
-        console.log(name);
-        console.log(price);
-        console.log(type);
-        console.log(brand);
+        props.callback({ data: "test" });
     };
 
     return (
