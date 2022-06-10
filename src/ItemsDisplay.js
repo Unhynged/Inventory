@@ -9,7 +9,7 @@ function ItemsDisplay(props) {
         <td>{item.brand}</td>
       </tr>
     );
-  }; // <td> is table data
+  }; 
 
   return (
     <div className="container">

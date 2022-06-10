@@ -13,7 +13,7 @@ function AddItem(props) {
       price: price,
       type: type,
       brand: brand,
-    }); // calling the addItem button pressed, then callback function that was passed to us in the props from app.js and then we're going to pass the name, type, price and brand (search filters/parameters) and we set the filters to be equal to whatever was passed to the callback function so this will change the state here. Then we have add item to data, this is the callback function we pass to our addItem.
+    }); 
     setName("");
     setPrice(0);
     setType("");
