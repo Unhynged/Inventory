@@ -33,12 +33,6 @@ function ItemsDisplay(props) {
     </div>
   );
 }
-// Going to create a table to show our items ^
+
 
 export default ItemsDisplay;
-
-// Using .map() to Render Data
-// inside the return function create { props.items.map(() => { })}
-// This function is going to return is a component that should be rendered for everysingle one of these items.
-//
-//
