@@ -1,3 +1,39 @@
 {
-  "items": []
+  "items": [
+    {
+      "name": "Apple",
+      "price": "0.99",
+      "type": "Red",
+      "brand": "Ruby",
+      "id": 1
+    },
+    {
+      "name": "Banana",
+      "price": "1.99",
+      "type": "Big",
+      "brand": "Big Bananas",
+      "id": 2
+    },
+    {
+      "name": "Cherries",
+      "price": "4.99",
+      "type": "Organic",
+      "brand": "Chewies Cherries",
+      "id": 3
+    },
+    {
+      "name": "Grapes",
+      "price": "3.99",
+      "type": "Organic",
+      "brand": "Gilberts Grapes",
+      "id": 4
+    },
+    {
+      "name": "Muesli",
+      "price": "5.99",
+      "type": "Apple/Cinnamon",
+      "brand": "Methusela's Muesli",
+      "id": 5
+    }
+  ]
 }
