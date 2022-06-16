@@ -34,6 +34,20 @@
       "type": "Apple/Cinnamon",
       "brand": "Methusela's Muesli",
       "id": 5
+    },
+    {
+      "name": "Cookies",
+      "price": "2.99",
+      "type": "Generic",
+      "brand": "Non Descript",
+      "id": 6
+    },
+    {
+      "name": "Hash Cookies",
+      "price": "7.99",
+      "type": "Get High",
+      "brand": "Stay High",
+      "id": 7
     }
   ]
 }

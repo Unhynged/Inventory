@@ -9,15 +9,15 @@ export default class Test extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mounted!");
+  //  console.log("mounted!");
   }
 
   componentDidUpdate() {
-    console.log("updated!");
+  //  console.log("updated!");
   }
 
   componentWillUnmount() {
-    console.log("cleanup");
+  //  console.log("cleanup");
   }
 
   clickedButton() {
