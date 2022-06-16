@@ -8,14 +8,10 @@ function App() {
   const [data, setData] = useState({ items: [] });
 
   useEffect(() => {
-    console.log("use effect");
-
-    return () => {
-      console.log("cleanup");
-    };
-  }, [data, filters]);
-
-  useEffect(() => { console.log("second use effect")}, [])
+    fetch("http://localhost:3000/items")
+      .then((response) => response.json())
+      .then((data) => setData({ items: data }));
+  }, []);
 
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
