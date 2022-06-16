@@ -2,10 +2,12 @@ import SearchBar from "./SearchBar";
 import AddItem from "./AddItem";
 import { useState } from "react";
 import ItemsDisplay from "./ItemsDisplay";
+import Test from "./Class";
 
 function App() {
   const [filters, setFilters] = useState({});
   const [data, setData] = useState({ items: [] });
+  const [showTest, setShowTest] = useState(true);
 
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
@@ -13,22 +15,21 @@ function App() {
 
   const addItemToData = (item) => {
     let items = data["items"];
-    // item.id = items.length; we want to remove the fact that we manually set the id. We want to send this item to the server and the server will automatically give it an id. Even though the item added doesn't have an id by default, it will automatically be given an id when we try to add it to the database. Every single item in the database has to have an id and so if there is no id sent, it will automatically give it a unique id. It iwll do that by looking at the other id's that exist and picking one that is one more than the largest id that is currently there.
 
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(item), // must convert to string
+      body: JSON.stringify(item), 
     };
     fetch("http://localhost:3000/items", requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data)); // what fetch does is allow you to send a request to a URL. This is the most basic way to do this in react. Inside the parentheses you type the URL you want to send the request to. The reason typed "http://localhost:3000/items" is because by default, what will happen is when we run the json-server we want to access the items or resource, as the key here is items. GET POST PUT DELETE .
+      .then((data) => console.log(data)); 
 
-    items.push(item); // we're going to get a response from the request through .then() It will wait for the request to go through, wait for a response to come back and then will allow us to grab the response and examine. fetch("http://localhost:3000/items", requestOptions).then((response) => response.json());
+    items.push(item); 
     setData({ items: items });
-  }; // Fetch and HTTP Requests: this function here addItemToData is add the item to our memory, computers RAM. This is temporary, as soon as we turn off the computer or we stop the web server, all these items go away. To make this persistant we need to send a request to our server and to tell the server to store this item to our db.json . What we want to send here is the item that we want to add to the database.
+  }; 
 
   const filterData = (data) => {
     const filteredData = [];
@@ -71,64 +72,95 @@ function App() {
       <div className="row mt-3">
         <AddItem addItem={addItemToData} />
       </div>
+      {showTest ? <Test destroy={setShowTest}/> : null}
     </div>
   );
 }
 
 export default App;
 
-// We want to create a database as the items we're creating are just being stored by react and the items are disappearing on a refresh.
+// Lifecycle methods are what you're going to use for class-based components.
 //
-// HTTP - Hypertext transfer protocol
+// Hooks specifically, the use effect hook, what you're going to use for functional components.
 //
-// Usually when you're going to have a database and you're going to have your front-end adding something to the databased, looking at stuff in the database, you create an API, an application programming interface. You'll usually create a restful API; rest stands for Representational State Transfer. In this case we don't want to create our own API, make our own separate server, we don't want to write the back end of this application, thats not the point of this tutorial.
+// The point of these is to allow some more advanced behaviour for your components; so essentially right when your component loads can you run something. Or when your component is being destroyed so longer rendered on the screen, can you run a clean up operation. 
 //
-// Instead we're going to us a JSON server. NPM package, allows us to create a mock rest api with simply one file, a json file.
+// CLASS-BASED COMPONENT SETUP
+//------------------------------- 
+// Created class.js to make the class-based component. Import React from "react";
+//------------------------------
+// export default class TEST extends React.Component {
+//    constructor(props) {
+//        this.state = {
+//            count: 0
+//        };
+//    }
+//-------------------------------------------------
+//  clickedButton() {
+//      this.setState({ count: this.state.count + 1});
+//      console.log("clicked!");
+//  }
 //
-// npm install -g json-server
+//    render() {
+//        <div>
+//            <p>Clicked: {this.state.count}</p>
+//            <button className="btn btn-primary" onCick={() => this.   clickedButton()}>Click Me!</button>
+//        </div>;
+//    }  
+// 
+//----------------------------------
 //
-// The reason you need to do this (-g , global) is so that you can run this server from anywhere, you don't have to be necessarily be inside this inventory folder.
+// LIFE CYCLE METHODS
 //
-// JSON stands for Javascript Object Notation,so whatever you would do in javascript you could write here in terms of creating an object. You'll have to make sure you have double quotations surrounding all your strings or key bouts.
-//
-// {
-//    "items": []
+// componentDidMount() {
+//    conosle.log("mounted!")
 // }
 //
-// Running the JSON Server
+// MOUNT
+// Mounting is the process of outputting the virtual representation of a component into the final UI representation. In a browser that would mean ouputting a React Element into an actual DOM element. 
 //
-// Go to Terminal, in the directory where you have this db.json file located.
-// > json-server db.json
+// Essentially this allows you to have an operation that you can perform right away once your component is rendered to the screen. 
 //
-// Now we have a rest api running that is going to allow
+// componentDidUpdate() {
+//     console.log("updated!")
+// }
 //
-// Fetch and HTTP Requests
+// Called immediately after updating occurs.. Not called for the initial render. 
 //
-// Fetch and HTTP Requests: this function here addItemToData is add the item to our memory, computers RAM. This is temporary, as soon as we turn off the computer or we stop the web server, all these items go away. To make this persistant we need to send a request to our server and to tell the server to store this item to our db.json . What we want to send here is the item that we want to add to the database.
+// componentWillUnmount() {
+//      console.log("unmounted!")
+// }
 //
-// what fetch does is allow you to send a request to a URL. This is the most basic way to do this in react. Inside the parentheses you type the URL you want to send the request to. The reason typed "http://localhost:3000/items" is because by default, what will happen is when we run the json-server we want to access the items or resource, as the key here is items.
+// This is before a component is to be destroyed or go away, this is a cleanup operation. 
 //
-// HTTP Methods
 //
-// Whenever you're accessing a web resource, website, you're having an http request sent to the server running that website and then that server is going to send you a response that contains the data that you asked for. Most often the data you're getting is the html that makes up a page. Sending a GET request to the servers to get the html that makes up that webpage (90% of the time).
 //
-// GET POST PUT DELETE
 //
-// Adding items to the database
-// headers: {
-//    "Content-Type": "application/json"
-// },
-// body: JSON.stringify(item)
 //
-// A header is essentially extra information that you're passing along to the server, we're telling the server hey the data we're going to pass here is going to be in the application/json, so get ready for it, we're giving it to you. You need to have this header, you can have more than one header.
 //
-// item.id = items.length; we want to remove the fact that we manually set the id. We want to send this item to the server and the server will automatically give it an id. Even though the item added doesn't have an id by default, it will automatically be given an id when we try to add it to the database. Every single item in the database has to have an id and so if there is no id sent, it will automatically give it a unique id. It iwll do that by looking at the other id's that exist and picking one that is one more than the largest id that is currently there.
 //
-// we're going to get a response from the request through .then() It will wait for the request to go through, wait for a response to come back and then will allow us to grab the response and examine. fetch("http://localhost:3000/items", requestOptions).then((response) => response.json());
 //
-// RECAP and SUMMARY
 //
-// Send request to json server, json server essentially adding and getting stuff from the db.json file. All we're doing is adding stuff to the file, sending a POST request to it which we defined, the body of the post request is the POST request is the item that we want to add but we're doing to stringify it first. Then send the request with those request options, we wait for response, get json from the response, that json is really the new item that the server added for us, we grab it and push it into the items list and set out data equal to the new items list which we've modified by adding data. 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
